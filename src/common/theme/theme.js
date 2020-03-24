@@ -13,6 +13,7 @@ export const colors = {
 }
 
 export const fontSizes = {
+  12: windowHeight * 0.018,
   14: windowHeight * 0.02,
   20: windowHeight * 0.03
 }
