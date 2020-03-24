@@ -10,14 +10,29 @@ import { windowWidth, windowHeight, colors, fontSizes } from '../common/theme/th
 import { images } from '../common/theme/images'
 
 
-export const TabBar = () => {
+export const TabBar = (props) => {
+  function onPress(type) {
+    if (type === 'Login') {
+      props.onPress(0)
+    }
+    if (type === 'Registration') {
+      props.onPress(windowWidth)
+    }
+  }
+
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity
+        onPress={onPress.bind(this, 'Login')}
+        style={styles.button}
+      >
         <Image source={images.user} style={styles.images} />
         <Text style={styles.titles}>Login</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity
+        onPress={onPress.bind(this, 'Registration')}
+        style={styles.button}
+      >
         <Image source={images.plus} style={styles.images} />
         <Text style={styles.titles}>Registration</Text>
       </TouchableOpacity>

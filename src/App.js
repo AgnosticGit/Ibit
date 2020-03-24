@@ -1,11 +1,8 @@
-import React from 'react'
+import React,{useRef} from 'react'
 import {
   View,
   ScrollView,
   StyleSheet,
-  Text,
-  TextInput,
-  Image
 } from 'react-native'
 import {
   colors,
@@ -19,6 +16,12 @@ import { TabBar } from './navigations/TabBar'
 
 
 export default () => {
+  const scroll = useRef()
+
+  function onPress(axisX) {
+    scroll.current.scrollTo({x:axisX})
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.background1} />
@@ -26,14 +29,15 @@ export default () => {
       <View style={styles.designRectangle} />
       <View style={styles.designTriangle} />
       <ScrollView
+        ref={scroll}
         horizontal
         pagingEnabled
         showsHorizontalScrollIndicator={false}
       >
         <Login />
-      <Registration />
+        <Registration />
       </ScrollView>
-    <TabBar />
+      <TabBar onPress={onPress} />
     </View >
   )
 }
