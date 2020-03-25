@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import {
   View,
   ScrollView,
@@ -15,6 +15,7 @@ import { TabBar } from './navigations/TabBar'
 
 
 export default App = () => {
+  const [scrollPos, setScrollPos] = useState()
   const scroll = useRef()
 
   return (
@@ -24,7 +25,9 @@ export default App = () => {
       <View style={styles.designRectangle} />
       <View style={styles.designTriangle} />
       <ScrollView
+        onScroll={setScrollPos}
         ref={scroll}
+        scrollEventThrottle={16}
         horizontal
         pagingEnabled
         showsHorizontalScrollIndicator={false}
@@ -32,7 +35,7 @@ export default App = () => {
         <Login />
         <Registration />
       </ScrollView>
-      <TabBar scrollRef={scroll} />
+      <TabBar scrollRef={scroll}/>
     </View >
   )
 }

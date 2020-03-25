@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import {
   TouchableOpacity,
   StyleSheet,
@@ -7,7 +7,7 @@ import {
 import { fontSizes, colors, windowHeight } from '../theme/theme'
 
 
-export const MainButton = (props) => (
+export const MainButton = memo((props) => (
   <TouchableOpacity
     style={[
       styles.container,
@@ -19,7 +19,7 @@ export const MainButton = (props) => (
   >
     <Text style={[styles.title, props.titleStyle]}>{props.title}</Text>
   </TouchableOpacity>
-)
+))
 
 const styles = StyleSheet.create({
   container: {

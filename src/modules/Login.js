@@ -1,10 +1,8 @@
 import React, { useState } from 'react'
 import {
   View,
-  ScrollView,
   StyleSheet,
   Text,
-  TextInput,
   Image,
   TouchableOpacity,
 } from 'react-native'
@@ -22,12 +20,12 @@ import { MainButton } from '../common/components/MainButton'
 export const Login = () => {
   const [username, setUsername] = useState()
   const [password, setPassword] = useState()
-
+  
   function onForgotPassword(){
     alert('Password recovery is in development')
   }
 
-  function onPress() {
+  function onPress() {  
     if (username && password) {
       alert('Authorized')
     } else {

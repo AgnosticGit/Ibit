@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, memo } from 'react'
 import {
   View,
   Text,
@@ -6,11 +6,16 @@ import {
   StyleSheet,
   Image
 } from 'react-native'
-import { windowWidth, windowHeight, colors, fontSizes } from '../common/theme/theme'
+import {
+  windowWidth,
+  windowHeight,
+  colors,
+  fontSizes
+} from '../common/theme/theme'
 import { images } from '../common/theme/images'
 
 
-export const TabBar = ({ scrollRef }) => {
+export const TabBar = memo(({ scrollRef }) => {
   const [isActive, setIsActive] = useState(true)
 
   function onPress(type) {
@@ -30,29 +35,21 @@ export const TabBar = ({ scrollRef }) => {
     <View style={styles.container}>
       <TouchableOpacity
         onPress={onPress.bind(this, 'Login')}
-        style={[styles.button,]}
+        style={styles.button}
       >
-        <Image
-          source={images.user}
-          style={[styles.images, isActive ? null : styles.isPassiveImage]}
-        />
-        <Text
-          style={[styles.titles, isActive ? null : styles.isPassiveTitle]}>Login</Text>
+        <Image source={images.user} style={styles.images} />
+        <Text style={styles.titles}>Login</Text>
       </TouchableOpacity>
       <TouchableOpacity
         onPress={onPress.bind(this, 'Registration')}
         style={styles.button}
       >
-        <Image
-          source={images.plus}
-          style={[styles.images, isActive ? styles.isPassiveImage : null]}
-        />
-        <Text
-          style={[styles.titles, isActive ? styles.isPassiveTitle : null]}>Registration</Text>
+        <Image source={images.plus} style={styles.images} />
+        <Text style={styles.titles}>Registration</Text>
       </TouchableOpacity>
-    </View>
+    </View >
   )
-}
+})
 
 const styles = StyleSheet.create({
   container: {
@@ -83,10 +80,4 @@ const styles = StyleSheet.create({
   titles: {
     fontSize: fontSizes[12]
   },
-  isPassiveImage: {
-    tintColor: 'grey',
-  },
-  isPassiveTitle: {
-    color: colors.greyB5
-  }
 })

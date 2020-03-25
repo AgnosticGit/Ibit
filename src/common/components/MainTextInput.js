@@ -1,14 +1,22 @@
-import React, { useState, useEffect } from 'react'
+import React, {
+  useState,
+  useEffect,
+  memo
+} from 'react'
 import {
   View,
   TextInput,
   Text,
   StyleSheet,
 } from 'react-native'
-import { fontSizes, colors, windowHeight } from '../theme/theme'
+import {
+  fontSizes,
+  colors,
+  windowHeight
+} from '../theme/theme'
 
 
-export const MainTextInput = (props) => {
+export const MainTextInput = memo((props) => {
   const [editable, setEditable] = useState(false)
 
   //Костыль нужен для того чтобы на некоторых устройствах Xiaomi не вылетало приложении при написании E-mail'а
@@ -34,7 +42,7 @@ export const MainTextInput = (props) => {
       />
     </View>
   )
-}
+})
 
 
 
