@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   View,
   ScrollView,
@@ -20,6 +20,21 @@ import { MainButton } from '../common/components/MainButton'
 
 
 export const Login = () => {
+  const [username, setUsername] = useState()
+  const [password, setPassword] = useState()
+
+  function onForgotPassword(){
+    alert('Password recovery is in development')
+  }
+
+  function onPress() {
+    if (username && password) {
+      alert('Authorized')
+    } else {
+      alert('Validation Error')
+    }
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.content}>
@@ -27,16 +42,21 @@ export const Login = () => {
         <Text style={styles.title}>Login To Continue...</Text>
         <View style={styles.form}>
           <View>
-            <MainTextInput title={'Username'} />
             <MainTextInput
+              onChangeText={setUsername}
+              title={'Username'}
+            />
+            <MainTextInput
+              onChangeText={setPassword}
+              secureTextEntry
               title={'Password'}
               style={styles.password}
             />
-            <TouchableOpacity>
+            <TouchableOpacity onPress={onForgotPassword}>
               <Text style={styles.forgotPassword}>Forgot password?</Text>
             </TouchableOpacity>
           </View>
-          <MainButton title={'LOGIN'} />
+          <MainButton onPress={onPress} title={'LOGIN'} />
         </View>
       </View>
     </View>

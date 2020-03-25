@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   View,
   Text,
@@ -10,13 +10,19 @@ import { windowWidth, windowHeight, colors, fontSizes } from '../common/theme/th
 import { images } from '../common/theme/images'
 
 
-export const TabBar = (props) => {
+export const TabBar = ({ scrollRef }) => {
+  const [isActive, setIsActive] = useState(true)
+
   function onPress(type) {
+    const { current } = scrollRef
+
     if (type === 'Login') {
-      props.onPress(0)
+      current.scrollTo({ x: 0 })
+      setIsActive(true)
     }
     if (type === 'Registration') {
-      props.onPress(windowWidth)
+      current.scrollToEnd()
+      setIsActive(false)
     }
   }
 
@@ -24,17 +30,25 @@ export const TabBar = (props) => {
     <View style={styles.container}>
       <TouchableOpacity
         onPress={onPress.bind(this, 'Login')}
-        style={styles.button}
+        style={[styles.button,]}
       >
-        <Image source={images.user} style={styles.images} />
-        <Text style={styles.titles}>Login</Text>
+        <Image
+          source={images.user}
+          style={[styles.images, isActive ? null : styles.isPassiveImage]}
+        />
+        <Text
+          style={[styles.titles, isActive ? null : styles.isPassiveTitle]}>Login</Text>
       </TouchableOpacity>
       <TouchableOpacity
         onPress={onPress.bind(this, 'Registration')}
         style={styles.button}
       >
-        <Image source={images.plus} style={styles.images} />
-        <Text style={styles.titles}>Registration</Text>
+        <Image
+          source={images.plus}
+          style={[styles.images, isActive ? styles.isPassiveImage : null]}
+        />
+        <Text
+          style={[styles.titles, isActive ? styles.isPassiveTitle : null]}>Registration</Text>
       </TouchableOpacity>
     </View>
   )
@@ -68,5 +82,11 @@ const styles = StyleSheet.create({
   },
   titles: {
     fontSize: fontSizes[12]
+  },
+  isPassiveImage: {
+    tintColor: 'grey',
+  },
+  isPassiveTitle: {
+    color: colors.greyB5
   }
 })

@@ -1,12 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   View,
-  ScrollView,
   StyleSheet,
   Text,
-  TextInput,
   Image,
-  TouchableOpacity,
 } from 'react-native'
 import {
   colors,
@@ -20,6 +17,24 @@ import { MainButton } from '../common/components/MainButton'
 
 
 export const Registration = () => {
+  const [username, setUsername] = useState()
+  const [password, setPassword] = useState()
+  const [confirmPassword, setConfirmPassword] = useState()
+
+  function onPress() {
+    if (username && password && confirmPassword) {
+      if (password.length < 6 && confirmPassword < 6) {
+        alert('Password cannot be shorter than 6 characters')
+      } else if (password !== confirmPassword) {
+        alert('Passwords must match')
+      } else {
+        alert('Success')
+      }
+    } else {
+      alert('Fields must not be empty')
+    }
+  }
+
   return (
     <View style={styles.container}>
       <View>
@@ -30,24 +45,33 @@ export const Registration = () => {
         <View style={styles.form}>
           <View>
             <MainTextInput
+              onChangeText={setUsername}
               titleStyle={styles.inputTitles}
               title={'Username'}
               left
             />
             <MainTextInput
+              onChangeText={setPassword}
+              secureTextEntry
               titleStyle={styles.inputTitles}
               title={'Password'}
               style={styles.password}
               left
             />
             <MainTextInput
+              onChangeText={setConfirmPassword}
+              secureTextEntry
               titleStyle={styles.inputTitles}
               title={'Confirm password'}
               style={styles.password}
               left
             />
           </View>
-          <MainButton title={'REGISTRATION'} left />
+          <MainButton
+            onPress={onPress}
+            title={'REGISTRATION'}
+            left
+          />
         </View>
       </View>
     </View>

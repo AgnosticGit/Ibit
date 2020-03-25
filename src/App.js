@@ -1,4 +1,4 @@
-import React,{useRef} from 'react'
+import React, { useRef, useState } from 'react'
 import {
   View,
   ScrollView,
@@ -9,18 +9,13 @@ import {
   windowHeight,
   windowWidth
 } from './common/theme/theme'
-import { images } from './common/theme/images'
 import { Login } from '../src/modules/Login'
 import { Registration } from './modules/Registration'
 import { TabBar } from './navigations/TabBar'
 
 
-export default () => {
+export default App = () => {
   const scroll = useRef()
-
-  function onPress(axisX) {
-    scroll.current.scrollTo({x:axisX})
-  }
 
   return (
     <View style={styles.container}>
@@ -37,7 +32,7 @@ export default () => {
         <Login />
         <Registration />
       </ScrollView>
-      <TabBar onPress={onPress} />
+      <TabBar scrollRef={scroll} />
     </View >
   )
 }

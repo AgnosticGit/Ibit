@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   View,
   TextInput,
@@ -8,19 +8,34 @@ import {
 import { fontSizes, colors, windowHeight } from '../theme/theme'
 
 
-export const MainTextInput = (props) => (
-  <View style={[styles.container, props.style]}>
-    <Text style={[styles.title, props.titleStyle]}>{props.title}</Text>
-    <TextInput
-      style={[
-        styles.textInput,
-        props.left
-          ? styles.borderLeftEmpty
-          : styles.borderRightEmpty
-      ]}
-    />
-  </View>
-)
+export const MainTextInput = (props) => {
+  const [editable, setEditable] = useState(false)
+
+  //Костыль нужен для того чтобы на некоторых устройствах Xiaomi не вылетало приложении при написании E-mail'а
+  useEffect(() => {
+    setTimeout(() => {
+      setEditable(true)
+    }, 100)
+  })
+
+  return (
+    <View style={[styles.container, props.style]}>
+      <Text style={[styles.title, props.titleStyle]}>{props.title}</Text>
+      <TextInput
+        onChangeText={props.onChangeText}
+        editable={editable}
+        secureTextEntry={props.secureTextEntry}
+        style={[
+          styles.textInput,
+          props.left
+            ? styles.borderLeftEmpty
+            : styles.borderRightEmpty
+        ]}
+      />
+    </View>
+  )
+}
+
 
 
 const styles = StyleSheet.create({
